@@ -1,0 +1,4 @@
+__pychache__/* linguist-vendored
+build/SR_EnvironmentManager/* linguist-vendored
+SR_EnvironmentManager.spec -linguist-generated
+SR_EMConfig.xml -linguist-detectable

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xml>
+	<Project Name='Project 1'>
+		<Variable Name='SR_PATH1' Value='C:\SR_PROJECT_1; C:\SR_PROJECT_1\TEMP' />
+		<Variable Name='SR_PATH2' Value='C:\SR_PROJECT_1; C:\SR_PROJECT_1\TEMP' />
+	</Project>
+	<Project Name='Project 2'>
+		<Variable Name='SR_PATH1' Value='C:\SR_PROJECT_2; C:\SR_PROJECT_2\TEMP' />
+		<Variable Name='SR_PATH2' Value='C:\SR_PROJECT_2; C:\SR_PROJECT_2\TEMP' />
+	</Project>
+</xml>
