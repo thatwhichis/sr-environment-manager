@@ -30,9 +30,7 @@ else:
 
 # CONFIGURE LOG OUTPUT FOR ERROR FILE GENERATION AND REPORTING
 b_logr_fail = False
-if not os.path.exists(s_dir + S_LOGDIR):
-  os.makedirs(s_dir + S_LOGDIR)
-else:
+if os.path.exists(s_dir + S_LOGDIR):
   if os.path.isfile(s_dir + S_LOGDIR + '\\' + S_LOGNAME):
     s_log = open(s_dir + S_LOGDIR + '\\' + S_LOGNAME, "r").read().split('LAUNCHED:')
     s_timestamp = s_log[len(s_log) - 1][0:14]
@@ -40,6 +38,8 @@ else:
       os.rename(s_dir + S_LOGDIR + '\\' + S_LOGNAME, s_dir + S_LOGDIR + '\\SR_EnvironmentManager_' + s_timestamp + '.log')
     except OSError:
       b_logr_fail = True
+else:
+  os.makedirs(s_dir + S_LOGDIR)
 log.basicConfig(filename = s_dir + S_LOGDIR + '\\' + S_LOGNAME, level=log.DEBUG)
 if b_logr_fail:
   log.debug('LOG FILE RENAME FAILURE')
@@ -53,7 +53,9 @@ w_root.title("ENVIRONMENT MANAGER")
 # DEFINE FUNTIONS
 # callback function to execute environment configuration
 def fu_environment ():
-  if xml_root is not None:
+  if xml_root is None:
+    log.debug('BUTTON PRESSED WITH NO VALID XML_ROOT')
+  else:
     log.info('BUTTON PRESSED WITH VALID XML_ROOT')
     log.info('SEARCHING FOR VALID PROJECT NAME:' + tks_om.get())
     for xml_project in xml_root.findall('Project'):
@@ -76,8 +78,6 @@ def fu_environment ():
           tkl_result = tk.Label(w_root, text = 'Environment not configured (see log)', fg = S_COLOR_BAD, font = FO_TEXT)
         tkl_result.place(relx = F_RELX, rely = 0.8, anchor = S_ANCHOR)
         break
-  else:
-    log.debug('BUTTON PRESSED WITH NO VALID XML_ROOT')
 
 # CREATE CANVAS
 tkc_canvas = tk.Canvas(w_root, width = I_WINDOW_WIDTH, height = I_WINDOW_HEIGHT)
